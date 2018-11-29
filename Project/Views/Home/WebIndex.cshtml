@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/style.css" rel="stylesheet" />
+<div class="container" style="margin:60px auto 0;">
+        <div class="news-info col-xs-7 col-sm-7 col-md-8">
+       
+            <!--Body content  start-->
+            @Html.Partial("_IndexArticle")
+        
+            <!--Body content  end-->
+        </div>
+        <div class="news-img col-xs-5 col-sm-5 col-md-4">
+            <!--Body Side  start-->         
+            @Html.Partial("_IndexSideColumns")
+            <!--Body Side  end-->
+        </div>
+
+</div>

@@ -1,0 +1,68 @@
+﻿@model  Project.Models.ArticleListModel
+<script language="javascript">
+    function getCurDate() {
+        var d = new Date();
+        var week;
+        switch (d.getDay()) {
+            case 1: week = "星期一"; break;
+            case 2: week = "星期二"; break;
+            case 3: week = "星期三"; break;
+            case 4: week = "星期四"; break;
+            case 5: week = "星期五"; break;
+            case 6: week = "星期六"; break;
+            default: week = "星期天";
+        }
+        var years = d.getFullYear();
+        var month = add_zero(d.getMonth() + 1);
+        var days = add_zero(d.getDate());
+        var hours = add_zero(d.getHours());
+        var minutes = add_zero(d.getMinutes());
+        var seconds = add_zero(d.getSeconds());
+        var ndate = years + "年" + month + "月" + days + "日 " + hours + ":" + minutes + ":" + seconds;
+        var divT = document.getElementById("dataInfo");
+        var dataWeek = document.getElementById("dataWeek");
+        divT.innerHTML = ndate;
+        dataWeek.innerHTML = week;
+    }
+    function add_zero(temp) {
+        if (temp < 10) return "0" + temp;
+        else return temp;
+    }
+    setInterval("getCurDate()", 100);
+</script>
+<aside class="sidebar hidden-xs ">
+    <!--Sidebar content-->
+    <div class="sentence">
+        <strong>每日一句</strong>
+        <h2 id="dataInfo"></h2>
+        <h2 id="dataWeek"></h2>
+        <p>你是我人生中唯一的主角，我却只能是你故事中的一晃而过得路人甲。</p>
+    </div>
+    <div class="sidebar-block recommend">
+        <h2 class="title"><strong>热门推荐</strong></h2>
+        <ul>
+            @foreach (var item in Model.ArtcileHot)
+            {
+
+                <li>
+                    <a target="_blank" href="@Url.Action("ArticleContent", new { articleId = item.ArticleId})">
+                        <span class="thumb">
+                            <img src=@Html.DisplayFor(m => item.ArticleCover) alt="" style="height:80px">
+                        </span>
+                         <span class="text text-line3">@Html.Raw(item.ArticleContent)</span>
+                        <span class="text-muted">@Html.Label("阅读("+item.ArticleClick+")")</span>
+                    </a>
+                </li>
+
+            }
+        </ul>
+    </div>
+
+    <div class="feeds">
+        <a class="feed feed-xlweibo" href="" target="_blank"><i></i>新浪微博</a>
+        <a class="feed feed-txweibo" href="" target="_blank"><i></i>腾讯微博</a>
+        <a class="feed feed-rss" href="" target="_blank"><i></i>订阅本站</a>
+        <a class="feed feed-weixin" data-toggle="popover" data-trigger="hover" title="微信扫一扫" data-html="true" data-content="<img src='~/Upload/019.jpg' alt=''>" href="javascript:;" target="_blank"><i></i>关注微信</a>
+    </div>
+</aside>
+

@@ -1,0 +1,72 @@
+﻿@using Project.Models
+@model  ArticleListModel
+@{
+    ViewBag.Title = "留言板";
+}
+<link href="~/Content/style.css" rel="stylesheet" />
+
+<div class="container content-wrap" style="margin:60px auto 0;">
+    <div class=" col-xs-7 col-sm-7 col-md-8 content">
+        <div class="content-block comment">
+            <h2 class="title"><strong>留言</strong></h2>
+            @using (Html.BeginForm("LeavaMassage", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline", id = "comment-form" }))
+            {
+
+                <div class="comment-title">
+                    <div class="form-group">
+                        <label for="commentName">昵称：</label>
+                        @Html.TextBoxFor(m => m.LeavaMsg.MessageName, new { @class = "form-control", id = "commentName", type = "text", placeholder = "请输入昵称" })
+                        @*     <input type="text" name="commentName" class="form-control" id="commentName" placeholder="技术博客">*@
+                    </div>
+                    <div class="form-group">
+                        <label for="commentEmail">邮箱：</label>
+                        @Html.TextBoxFor(m => m.LeavaMsg.MessageEmali, new
+                   {
+                       @class = "form-control",
+                       id = "commentEmail",
+                       type = "text",
+                       placeholder = "xxxx@xxxx.com"
+                   })
+                        @* <input type="email" name="commentEmail" class="form-control" id="commentEmail" placeholder="admin@xxxx.com">*@
+                    </div>
+                </div>
+                <div class="comment-form">
+                    @Html.TextAreaFor(m => m.LeavaMsg.MessageContent, new { placeholder = "欢迎留言", name = "commentContent" })
+                    @*<textarea placeholder="你的评论可以一针见血" name="commentContent"></textarea>*@
+                    <div class="comment-form-footer">
+                        <div class="comment-form-btn">
+                            <button type="submit" class="btn btn-default btn-comment">提交评论</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="content-block comment-content">
+                <h2 class="title"><strong>最新评论</strong></h2>
+                <ul>
+                
+                            @foreach (var item in Model.Msg)
+                            {
+
+                                <li>
+                                    <span class="face">
+                                        <img src="~/Upload/019.png" style="width:40px" />
+                                    </span>
+                                    <span class="text">
+                                        <strong>@Html.Label(item.MessageName)</strong> (@Html.Label(item.MessageTime)) 说：<br />
+                                        @Html.Label(item.MessageContent)
+                                    </span>
+                                </li>
+                            }
+                       
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    @*<div class="news-img col-xs-5 col-sm-5 col-md-4">
+        <!--Body Side  start-->
+        @Html.Partial("_IndexSideColumns")
+        <!--Body Side  end-->
+    </div>*@
+
+</div>

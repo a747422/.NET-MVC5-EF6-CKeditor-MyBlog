@@ -1,0 +1,31 @@
+﻿@model  Project.Models.ArticleListModel
+
+@{
+    ViewBag.Title = "文章内容";
+}
+<link href="~/Content/style.css" rel="stylesheet" />
+<link href="~/Content/nprogress.css" rel="stylesheet" />
+<div class="container" style="margin:60px auto 0;">
+    <div class="news-info col-xs-7 col-sm-7 col-md-8">
+      <header class="news_header">      
+        <h2>@Html.Label(Model.ArtcleContent.ArticleName)</h2>
+        <ul>
+          <li>@Html.Label(Model.ArtcleContent.UserId)发布于 @Html.Label(Model.ArtcleContent.ArticleTime)</li>
+          <li>栏目：@Html.ActionLink(Model.ArtcleContent.SortArticleName, "Index", "Home", new { target = "_blank" })</li>
+          <li>来源：<a href="#" title="" target="_blank">互联网</a></li>
+          <li>共 <strong>@Html.Label(""+Model.ArtcleContent.ArticleClick)</strong> 人围观 </li>
+        </ul>
+      </header>
+      <article class="news_content">
+        @Html.Raw(Model.ArtcleContent.ArticleContent);
+      </article>
+      <div class="tags news_tags">标签： <span data-toggle="tooltip" data-placement="bottom" title="查看关于 本站 的文章"><a href="">本站</a></span> <span data-toggle="tooltip" data-placement="bottom" title="查看关于 技术博客 的文章"><a href="">技术博客</a></span> </div>
+      
+    </div>
+    <div class="news-img col-xs-5 col-sm-5 col-md-4">
+        <!--Body Side  start-->
+        @Html.Partial("_IndexSideColumns")
+        <!--Body Side  end-->
+    </div>
+
+</div>

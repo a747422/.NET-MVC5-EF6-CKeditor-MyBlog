@@ -1,0 +1,26 @@
+﻿@model  Project.Models.ArticleListModel
+
+
+    @foreach (var item in Model.ArtcleList)
+    {
+        <div class="news-list">
+            <div class="news-img col-xs-6 col-sm-6 col-md-5">
+                <a target="_blank" href="">
+                    <img src=@Html.DisplayFor(m => item.ArticleCover) alt="" style="height:200px">
+                </a>
+            </div>
+            <div class="news-info col-xs-6 col-sm-6 col-md-7">
+                <dl>
+                    @*DisplayFor (model=>model.xxx) 生成纯文本，显示xxx列的内容*@
+                    <dt>
+                    
+                        @Html.ActionLink("标题：" + item.ArticleName, "ArticleContent", new { articleId = item.ArticleId}, new { target = "_blank" })
+
+                    </dt>
+                    @*   <dd><span class="name"><a href="" title="由 个人技术博客 发布" rel="author">个人技术博客</a></span> <span class="identity"></span> <span class="time"> 2015-10-19 </span></dd>*@
+                    <dd class="text text-line3">内容：@Html.Raw(item.ArticleContent)</dd>
+                </dl>
+                @*<div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md"> <a href="">本站</a> <a href="">个人技术博客</a> </span> <span class="look"> 共 <strong>2126</strong> 人围观，发现 <strong> 12 </strong> 个不明物体 </span> </div>*@
+            </div>
+        </div>
+    }
